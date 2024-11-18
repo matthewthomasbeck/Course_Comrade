@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <!-- Profile Button -->
+        <ImageButton
+            android:id="@+id/buttonProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_person_outline_24"
+            android:contentDescription="@string/profile"
+            android:background="?attr/selectableItemBackground"
+            android:layout_gravity="end"
+            android:padding="8dp" />
+
+        <!-- Page Title -->
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/black" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Course Name and Description Container -->
+    <LinearLayout
+        android:id="@+id/courseNameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/blue_shade_1">
+
+        <!-- Icon and Course Name -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal">
+
+            <!-- Icon -->
+            <ImageView
+                android:id="@+id/courseIcon"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/baseline_menu_book_24"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Course Name -->
+            <TextView
+                android:id="@+id/courseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <!-- Course Description -->
+        <TextView
+            android:id="@+id/courseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:ellipsize="none"
+            android:scrollbars="vertical"
+            android:maxLines="10"
+            android:scrollHorizontally="false"
+            android:singleLine="false"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/professorsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/courseNameContainer"
+        android:clipToPadding="false"/>
+</RelativeLayout>

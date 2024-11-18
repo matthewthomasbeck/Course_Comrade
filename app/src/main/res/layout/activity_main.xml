@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--******************************************************************************-->
+<!-- This code and its associated files were created at the instruction of        -->
+<!-- professors at the University of Texas at San Antonio during my time as a     -->
+<!-- student at the university. I, Matthew Thomas Beck, can confirm that myself   -->
+<!-- and any project partners (if applicable) were the ones responsible for       -->
+<!-- writing it.                                                                  -->
+<!--******************************************************************************-->
+
+
+
+
+
+<!--****************************************************-->
+<!--*************** main_classes.xml XML ***************-->
+<!--****************************************************-->
+
+
+<!--********** MAIN ACTIVITY PAGE **********-->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--********** TOOL BAR **********-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <!--***** page name *****-->
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Page Title"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!--***** profile button *****-->
+
+    <ImageButton
+        android:id="@+id/buttonProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_person_outline_24"
+        android:contentDescription="@string/profile"
+        android:background="?attr/selectableItemBackground"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp" />
+
+
+    <!--********** OPTIONS CONTAINER **********-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical">
+
+        <!--***** degree map *****-->
+
+        <TextView
+            android:id="@+id/degreeMap"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="Degree Map"
+            android:padding="16dp"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:background="@color/blue_shade_1" />
+
+        <!--***** classes *****-->
+
+        <TextView
+            android:id="@+id/classes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Classes"
+            android:padding="16dp"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:drawableEnd="@drawable/baseline_collections_bookmark_24"
+            android:background="@color/tan_shade_1" />
+
+        <!--***** professors *****-->
+
+        <TextView
+            android:id="@+id/professors"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Professors"
+            android:padding="16dp"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:drawableEnd="@drawable/baseline_people_outline_24"
+            android:background="@color/tan_shade_2" />
+
+        <!--***** TBD *****-->
+
+        <TextView
+            android:id="@+id/backupButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="TBD"
+            android:padding="16dp"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:drawableEnd="@drawable/baseline_question_mark_24"
+            android:background="@color/tan_shade_3" />
+    </LinearLayout>
+
+</RelativeLayout>
