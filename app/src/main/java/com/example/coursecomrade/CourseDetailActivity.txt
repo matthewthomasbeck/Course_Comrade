@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import com.example.coursecomrade.ProfessorAdapter
-import com.example.coursecomrade.R
 
 class CourseDetailActivity : AppCompatActivity() {
 

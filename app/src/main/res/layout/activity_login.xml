@@ -1,57 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--******************************************************************************-->
-<!-- This code and its associated files were created at the instruction of        -->
-<!-- professors at the University of Texas at San Antonio during my time as a     -->
-<!-- student at the university. I, Matthew Thomas Beck, can confirm that myself   -->
-<!-- and any project partners (if applicable) were the ones responsible for       -->
-<!-- writing it.                                                                  -->
-<!--******************************************************************************-->
-
-
-
-
-
-<!--******************************************************-->
-<!--*************** activity_login.xml XML ***************-->
-<!--******************************************************-->
-
-
-<!--********** LOGIN ACTIVITY PAGE **********-->
-
-<RelativeLayout
-
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <!--***** username *****-->
-
+    <!-- Username -->
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
-        android:layout_marginBottom="16dp" />
+        android:inputType="text" />
 
-    <!--***** password *****-->
-
+    <!-- Password -->
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:layout_below="@id/editTextUsername"
-        android:layout_marginBottom="16dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp" />
 
-    <!--***** log in button *****-->
-
+    <!-- Login Button -->
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log In"
-        android:layout_below="@id/editTextPassword" />
-</RelativeLayout>
+        android:text="Login"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/tan_shade_1"
+        android:textColor="@android:color/white" />
+
+    <!-- Create Account Button -->
+    <Button
+        android:id="@+id/buttonCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/tan_shade_2"
+        android:textColor="@android:color/white" />
+</LinearLayout>

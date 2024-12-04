@@ -34,11 +34,10 @@
             android:name=".ProfessorsActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".CourseDetailActivity" />
-
-        <activity
-            android:name=".ProfessorDetailActivity" />
+        <activity android:name=".CourseDetailActivity" />
+        <activity android:name=".ProfessorDetailActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ProfileActivity" />
     </application>
 
 </manifest>

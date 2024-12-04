@@ -17,29 +17,17 @@
 
 /********** IMPORT DEPENDENCIES **********/
 
-package com.example.coursecomrade
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+package com.example.coursecomrade;
 
 
 
 
 
-/*******************************************************/
-/*************** ProfileActivity.kt JAVA ***************/
-/*******************************************************/
+/*********************************************************/
+/*************** DegreeMapActivity.kt JAVA ***************/
+/*********************************************************/
 
 
-/********** PROFILE ACTIVITY CLASS **********/
+/********** DEGREE MAP ACTIVITY CLASS **********/
 
-class ProfileActivity : AppCompatActivity() {
-
-
-    /********** CREATE PAGE **********/
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-    }
-}
+class DegreeMapActivity {}

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coursecomrade.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -51,23 +50,46 @@ class ProfessorsActivity : AppCompatActivity() {
         loadProfessors()
     }
 
+    /********** PROFILE TAB **********/
     private fun showProfileOptions(view: View) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.profile_menu, popupMenu.menu)
+
         popupMenu.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.menu_profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
+                    toolbarTitle.text = "Profile"
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.menu_logout -> {
-                    Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show()
+                    // Logout user and redirect to LoginActivity
+                    logoutUser()
                     true
                 }
                 else -> false
             }
         }
+
         popupMenu.show()
+    }
+
+    /********** PROFILE TAB **********/
+    private fun logoutUser() {
+        // Clear the login state
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("is_logged_in", false)
+        editor.apply()
+
+        // Show a Toast message
+        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+        // Redirect to LoginActivity
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish() // Finish MainActivity to prevent the user from navigating back
     }
 
     private fun loadProfessors() {

@@ -6,18 +6,8 @@
 /* writing it.                                                                  */
 /********************************************************************************/
 
-
-
-
-
-/************************************************************/
-/*************** IMPORT / CREATE DEPENDENCIES ***************/
-/************************************************************/
-
-
-/********** IMPORT DEPENDENCIES **********/
-
 package com.example.coursecomrade
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -29,21 +19,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
-
-
-
-
-/****************************************************/
-/*************** MainActivity.kt JAVA ***************/
-/****************************************************/
-
-
-/********** MAIN ACTIVITY CLASS **********/
-
 class MainActivity : AppCompatActivity() {
 
     /***** set variables *****/
-
     private lateinit var buttonProfile: ImageButton
     private lateinit var degreeMap: TextView
     private lateinit var classes: TextView
@@ -54,10 +32,22 @@ class MainActivity : AppCompatActivity() {
 
 
     /********** CREATE PAGE **********/
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+
+        // Check login state
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
+
+        if (!isLoggedIn) {
+            // Redirect to LoginActivity if not logged in
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish() // Prevent returning to MainActivity without logging in
+            return
+        }
+
+        // Load the main layout if the user is logged in
         setContentView(R.layout.activity_main)
 
         toolbar = findViewById(R.id.toolbar)
@@ -74,72 +64,74 @@ class MainActivity : AppCompatActivity() {
         toolbarTitle.text = "Home"
 
         buttonProfile.setOnClickListener {
-
             showProfileOptions(it)
         }
 
         degreeMap.setOnClickListener {
-
             val intent = Intent(this, DegreeMapActivity::class.java)
             startActivity(intent)
         }
 
         classes.setOnClickListener {
-
             val intent = Intent(this, ClassesActivity::class.java)
             startActivity(intent)
         }
 
         professors.setOnClickListener {
-
             val intent = Intent(this, ProfessorsActivity::class.java)
             startActivity(intent)
         }
 
         backupButton.setOnClickListener {
-
-            // TODO talk with team if anything needed
+            // TODO: Implement backup functionality
         }
     }
 
     /********** RESUME HOME PAGE **********/
-
     override fun onResume() {
-
         super.onResume()
         toolbarTitle.text = "Home"
     }
 
-
     /********** PROFILE TAB **********/
-
     private fun showProfileOptions(view: View) {
-
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.profile_menu, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-
             when (item.itemId) {
-
                 R.id.menu_profile -> {
-
                     toolbarTitle.text = "Profile"
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     true
                 }
-
                 R.id.menu_logout -> {
-
-                    Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show()
+                    // Logout user and redirect to LoginActivity
+                    logoutUser()
                     true
                 }
-
                 else -> false
             }
         }
 
         popupMenu.show()
+    }
+
+    /********** PROFILE TAB **********/
+    private fun logoutUser() {
+        // Clear the login state
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("is_logged_in", false)
+        editor.apply()
+
+        // Show a Toast message
+        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+        // Redirect to LoginActivity
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish() // Finish MainActivity to prevent the user from navigating back
     }
 }
