@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- First Row: Semester Name and Hours -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <!-- Semester Name -->
+        <TextView
+            android:id="@+id/semesterName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@android:color/white" />
+
+        <!-- Hours -->
+        <TextView
+            android:id="@+id/semesterHours"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:gravity="end"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Hours: 0" />
+    </LinearLayout>
+
+    <!-- Second Row: Optional Additional Information -->
+    <TextView
+        android:id="@+id/semesterDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@android:color/white" />
+</LinearLayout>

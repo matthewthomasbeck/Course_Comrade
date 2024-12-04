@@ -116,16 +116,21 @@ public class LoginActivity extends AppCompatActivity {
             }
             reader.close();
 
-            // Append new account
+            // Append new account to users.csv
             try (FileWriter writer = new FileWriter(file, true)) {
                 writer.write(username + "," + password + "\n");
             }
+
+            // Create semester CSV files for the new user
+            initializeSemesterFiles(username);
+
         } catch (IOException e) {
             Log.e("AccountError", "Error creating account: " + e.getMessage());
             return false;
         }
         return true;
     }
+
 
     private void loginUser(String username, String password) {
         if (checkCredentials(username, password)) {
@@ -153,5 +158,36 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void initializeSemesterFiles(String username) {
+        String[] semesters = {
+                "Semester 1 - Autumn",
+                "Semester 2 - Spring",
+                "Semester 2.5 - Summer",
+                "Semester 3 - Autumn",
+                "Semester 4 - Spring",
+                "Semester 4.5 - Summer",
+                "Semester 5 - Autumn",
+                "Semester 6 - Spring",
+                "Semester 6.5 - Summer",
+                "Semester 7 - Autumn",
+                "Semester 8 - Spring"
+        };
+
+        for (String semester : semesters) {
+            String sanitizedSemesterName = semester.replace(" ", "_").replace("-", "").toLowerCase();
+            File semesterFile = new File(getFilesDir(), username + "_" + sanitizedSemesterName + ".csv");
+
+            if (!semesterFile.exists()) {
+                try (FileWriter writer = new FileWriter(semesterFile)) {
+                    // Initialize with the new header structure
+                    writer.write("class_id,class_name,class_code,credit_hours\n");
+                    Log.d("FileInit", "Created file: " + semesterFile.getName());
+                } catch (IOException e) {
+                    Log.e("FileError", "Error creating semester file: " + e.getMessage());
+                }
+            }
+        }
     }
 }

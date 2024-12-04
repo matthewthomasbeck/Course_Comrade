@@ -38,6 +38,7 @@
         <activity android:name=".ProfessorDetailActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".SemesterDetailActivity" />
     </application>
 
 </manifest>

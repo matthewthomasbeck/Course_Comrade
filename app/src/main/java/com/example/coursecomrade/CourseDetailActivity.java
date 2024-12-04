@@ -3,20 +3,23 @@ package com.example.coursecomrade;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,20 +74,71 @@ public class CourseDetailActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.professorsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ProfessorAdapter(this, professors));
+
+        // Add Class to Semester Button
+        Button addClassButton = findViewById(R.id.buttonAddClassToSemester);
+        addClassButton.setOnClickListener(v -> showAddClassDialog());
+    }
+
+    private void showAddClassDialog() {
+        String[] semesters = {
+                "Semester 1 - Autumn",
+                "Semester 2 - Spring",
+                "Semester 2.5 - Summer",
+                "Semester 3 - Autumn",
+                "Semester 4 - Spring",
+                "Semester 4.5 - Summer",
+                "Semester 5 - Autumn",
+                "Semester 6 - Spring",
+                "Semester 6.5 - Summer",
+                "Semester 7 - Autumn",
+                "Semester 8 - Spring"
+        };
+
+        // Create a dialog for semester selection
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Select Semester")
+                .setItems(semesters, (dialog, which) -> {
+                    String selectedSemester = semesters[which];
+                    addClassToSemester(selectedSemester);
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void addClassToSemester(String semester) {
+        String classId = getIntent().getStringExtra("COURSE_ID");
+        String className = getIntent().getStringExtra("COURSE_NAME");
+        String classCode = getIntent().getStringExtra("COURSE_CODE");
+        String creditHours = "3"; // You can replace this with actual data if available
+
+        if (classId == null || className == null || classCode == null) {
+            Toast.makeText(this, "Error: Missing class details", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Sanitize semester name for file naming
+        String sanitizedSemesterName = semester.replace(" ", "_").replace("-", "").toLowerCase();
+        String username = getSharedPreferences("user_prefs", MODE_PRIVATE).getString("logged_in_user", "default_user");
+        File semesterFile = new File(getFilesDir(), username + "_" + sanitizedSemesterName + ".csv");
+
+        try (FileWriter writer = new FileWriter(semesterFile, true)) {
+            writer.write(classId + "," + className + "," + classCode + "," + creditHours + "\n");
+            Toast.makeText(this, "Class added to " + semester, Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Log.e("FileError", "Error adding class to semester: " + e.getMessage());
+            Toast.makeText(this, "Error saving class to semester", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private Map<String, ProfessorData> loadAllProfessors() {
         Map<String, ProfessorData> professorMap = new HashMap<>();
 
         try {
-            // Open professors.csv from assets
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("professors.csv")));
-
-            // Skip header
-            reader.readLine();
-
-            // Read each line and create a map of professors by ID
+            reader.readLine(); // Skip header
             String line;
+
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
                 if (tokens.length >= 5) {
@@ -110,17 +164,11 @@ public class CourseDetailActivity extends AppCompatActivity {
         List<ProfessorData> professors = new ArrayList<>();
 
         try {
-            // Load all professors
             Map<String, ProfessorData> allProfessors = loadAllProfessors();
-
-            // Open id.csv to map professors to classes
             BufferedReader readerMappings = new BufferedReader(new InputStreamReader(getAssets().open("id.csv")));
-
-            // Skip header
-            readerMappings.readLine();
-
-            // Filter professors associated with the course
+            readerMappings.readLine(); // Skip header
             String line;
+
             while ((line = readerMappings.readLine()) != null) {
                 String[] tokens = line.split(",");
                 if (tokens.length == 2 && tokens[0].trim().equals(classId)) {
@@ -139,7 +187,6 @@ public class CourseDetailActivity extends AppCompatActivity {
         return professors;
     }
 
-    // Function to display profile options menu
     private void showProfileOptions(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.getMenuInflater().inflate(R.menu.profile_menu, popupMenu.getMenu());

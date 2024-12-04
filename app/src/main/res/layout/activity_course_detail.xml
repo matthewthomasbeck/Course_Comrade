@@ -88,6 +88,15 @@
             android:maxLines="10"
             android:scrollHorizontally="false"
             android:singleLine="false"/>
+
+        <Button
+            android:id="@+id/buttonAddClassToSemester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Class to Semester"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/tan_shade_2"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
