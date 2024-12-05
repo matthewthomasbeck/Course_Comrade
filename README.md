@@ -22,4 +22,5 @@ To run this Application Clone the repository to your local machine and open your
 
 - The descriptions for a lot of the classes are cut off or do not appear at all... this was an ongoing issue that coninue to persists
 - Never got around to class removal feature
-- small graphical semantic issues
+- Small graphical semantic issues
+- Didn't get around to finishing the profile reset password feature
