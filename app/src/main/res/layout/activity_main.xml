@@ -104,11 +104,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="TBD"
+            android:text="Meet The Creators"
             android:padding="16dp"
             android:textSize="24sp"
             android:textColor="@color/white"
-            android:drawableEnd="@drawable/baseline_question_mark_24"
+            android:drawableEnd="@drawable/baseline_school_24"
             android:background="@color/tan_shade_3" />
     </LinearLayout>
 </RelativeLayout>

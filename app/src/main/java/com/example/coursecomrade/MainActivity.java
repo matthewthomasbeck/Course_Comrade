@@ -105,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: Implement backup functionality
             }
         });
+
+        backupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MeetCreatorsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /********** RESUME HOME PAGE **********/
