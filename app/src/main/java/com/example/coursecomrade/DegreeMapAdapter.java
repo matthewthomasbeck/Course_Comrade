@@ -1,6 +1,7 @@
 package com.example.coursecomrade;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,28 +31,32 @@ public class DegreeMapAdapter extends RecyclerView.Adapter<DegreeMapAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String semester = semesterList.get(position);
+        String semesterName = semesterList.get(position);
 
         // Set semester name
-        holder.semesterName.setText(semester);
-
-        // Set hours (default to 0 for now)
-        holder.semesterHours.setText("Hours: 0");
+        holder.semesterTitle.setText(semesterName);
 
         // Set alternating background colors
         int backgroundColor;
         switch (position % 3) {
             case 0:
-                backgroundColor = R.color.tan_shade_1;
+                backgroundColor = R.color.tan_shade_1; // First tan shade
                 break;
             case 1:
-                backgroundColor = R.color.tan_shade_2;
+                backgroundColor = R.color.tan_shade_2; // Second tan shade
                 break;
             default:
-                backgroundColor = R.color.tan_shade_3;
+                backgroundColor = R.color.tan_shade_3; // Third tan shade
                 break;
         }
         holder.itemView.setBackgroundResource(backgroundColor);
+
+        // Set click listener
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, SemesterDetailActivity.class);
+            intent.putExtra("SEMESTER_NAME", semesterName);
+            context.startActivity(intent);
+        });
     }
 
 
@@ -61,13 +66,11 @@ public class DegreeMapAdapter extends RecyclerView.Adapter<DegreeMapAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView semesterName;
-        TextView semesterHours;
+        TextView semesterTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            semesterName = itemView.findViewById(R.id.semesterName);
-            semesterHours = itemView.findViewById(R.id.semesterHours);
+            semesterTitle = itemView.findViewById(R.id.semesterName);
         }
     }
 }
