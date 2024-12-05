@@ -36,10 +36,9 @@ public class MeetCreatorsActivity extends AppCompatActivity {
             // Profile options logic
         });
 
-        // Add GitHub links dynamically
         LinearLayout githubLinksContainer = findViewById(R.id.githubLinksContainer);
-        githubLinksContainer.setPadding(0, 0, 0, 0); // Remove padding from container
-        githubLinksContainer.removeAllViews(); // Clear any previously added views
+        githubLinksContainer.setPadding(0, 0, 0, 0);
+        githubLinksContainer.removeAllViews();
 
         String[] githubNames = {
                 "Matthew's GitHub",
@@ -70,20 +69,17 @@ public class MeetCreatorsActivity extends AppCompatActivity {
             githubLink.setClickable(true);
             githubLink.setFocusable(true);
 
-            // Add padding for text alignment
-            githubLink.setPadding(32, 32, 32, 32); // Left, Top, Right, Bottom
-            githubLink.setGravity(Gravity.START | Gravity.CENTER_VERTICAL); // Align text left and vertically center
+            githubLink.setPadding(32, 32, 32, 32);
+            githubLink.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 
-            // Set layout params to eliminate white space
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    250 // Increased height for better visuals
+                    250
             );
-            params.setMargins(0, 0, 0, 0); // Remove all margins
+            params.setMargins(0, 0, 0, 0);
             githubLink.setLayoutParams(params);
 
-            // Set the click listener to open GitHub URL
-            int finalI = i; // Required for lambda
+            int finalI = i;
             githubLink.setOnClickListener(v -> openGitHub(githubUrls[finalI]));
 
             githubLinksContainer.addView(githubLink);
