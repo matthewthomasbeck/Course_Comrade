@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +38,7 @@ public class MeetCreatorsActivity extends AppCompatActivity {
 
         // Add GitHub links dynamically
         LinearLayout githubLinksContainer = findViewById(R.id.githubLinksContainer);
+        githubLinksContainer.setPadding(0, 0, 0, 0); // Remove padding from container
         githubLinksContainer.removeAllViews(); // Clear any previously added views
 
         String[] githubNames = {
@@ -70,16 +70,16 @@ public class MeetCreatorsActivity extends AppCompatActivity {
             githubLink.setClickable(true);
             githubLink.setFocusable(true);
 
-            // Add padding for better alignment and spacing
+            // Add padding for text alignment
             githubLink.setPadding(32, 32, 32, 32); // Left, Top, Right, Bottom
-            githubLink.setGravity(Gravity.START | Gravity.CENTER_VERTICAL); // Align text to left and vertically center
+            githubLink.setGravity(Gravity.START | Gravity.CENTER_VERTICAL); // Align text left and vertically center
 
-            // Set layout params for proper width and height
+            // Set layout params to eliminate white space
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    200 // Height in pixels
+                    250 // Increased height for better visuals
             );
-            params.setMargins(0, 16, 0, 0); // Spacing between items (remove side margins to eliminate white borders)
+            params.setMargins(0, 0, 0, 0); // Remove all margins
             githubLink.setLayoutParams(params);
 
             // Set the click listener to open GitHub URL
