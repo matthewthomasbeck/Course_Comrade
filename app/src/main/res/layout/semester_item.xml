@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?android:selectableItemBackground">
 
     <!-- First Row: Semester Name and Hours -->
     <LinearLayout
@@ -22,7 +23,8 @@
             android:textStyle="bold"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:paddingEnd="8dp" />
 
         <!-- Hours -->
         <TextView
@@ -31,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:textColor="@android:color/white"
             android:gravity="end"
             android:ellipsize="end"
@@ -44,5 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:visibility="gone" />
 </LinearLayout>
